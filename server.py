@@ -125,6 +125,11 @@ def echo():
     except Exception as e:
         print(e)
         return jsonify({'status': 'failure'})
+    
+# Hello world get route on the root path
+@app.route('/', methods=['GET'])
+def hello_world():
+    return 'Hello, World!'
 
 
 # run on port 80 so that it can be accessed from outside
