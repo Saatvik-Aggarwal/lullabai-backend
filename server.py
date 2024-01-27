@@ -79,6 +79,8 @@ def synthesize():
         generated_file_name = f'{speaker_name}-{hashlib.sha256(text.encode()).hexdigest()}.wav'
         save_path = f'{output_generated_dir}/{generated_file_name}'
 
+        generated = False
+
         # if the file doesn't exist, synthesize
         if not os.path.exists(save_path):
             # Run the base speaker TTS
@@ -94,8 +96,10 @@ def synthesize():
                 message=""
             )
 
+            generated = True
+
         # send the file name to the client
-        return jsonify({'status': 'success', 'file_name': generated_file_name})        
+        return jsonify({'status': 'success', 'file_name': generated_file_name, 'newly_generated': generated})   
         
     except Exception as e:
         print(e)
