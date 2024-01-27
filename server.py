@@ -33,7 +33,7 @@ from flask_cors import CORS
 import json
 import hashlib
 
-app = Flask("lullabai")
+app = Flask(__name__)
 CORS(app)
 
 @app.route('/add_voice', methods=['POST'])
@@ -113,3 +113,6 @@ def get_file():
     except Exception as e:
         print(e)
         return jsonify({'status': 'failure'})
+
+# run on port 80 so that it can be accessed from outside
+app.run(host="0.0.0.0", port=80)
