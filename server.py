@@ -85,7 +85,7 @@ def synthesize():
         if not os.path.exists(save_path):
             # Run the base speaker TTS
             src_path = f'{output_dir}/tmp.wav'
-            base_speaker_tts.tts(text, src_path, speaker='friendly', language='English', speed=1.0)
+            base_speaker_tts.tts(text, src_path, speaker='friendly', language='English', speed=1.15)
 
             # Convert the tone and color
             tone_color_converter.convert(
