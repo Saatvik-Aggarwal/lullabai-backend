@@ -1,0 +1,1 @@
+sudo env "PATH=$PATH" python server.py

@@ -113,6 +113,19 @@ def get_file():
     except Exception as e:
         print(e)
         return jsonify({'status': 'failure'})
+    
+# Echo endpoint to test if the server is running
+@app.route('/echo', methods=['POST'])
+# Input: text
+# Output: text
+def echo():
+    try:
+        text = request.form['text']
+        return jsonify({'status': 'success', 'text': text})
+    except Exception as e:
+        print(e)
+        return jsonify({'status': 'failure'})
+
 
 # run on port 80 so that it can be accessed from outside
 app.run(host="0.0.0.0", port=80, debug=True)
