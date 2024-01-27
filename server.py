@@ -42,9 +42,9 @@ CORS(app)
 def add_voice():
     try:
         speaker_name = request.form['speaker_name']
-        # If speaker already exists (i.e. speaker_name.mp3 already exists), return failure
+        # If speaker already exists (i.e. speaker_name.mp3 already exists), return success
         if os.path.exists(f'{output_dir}/{speaker_name}.mp3'):
-            return jsonify({'status': 'failure'})
+            return jsonify({'status': 'success', 'message': 'Speaker already exists'})
 
         mp3_file = request.files['voice']
         mp3_file.save(f'{output_dir}/{speaker_name}.mp3')
@@ -53,7 +53,7 @@ def add_voice():
         reference_speaker = f'{output_dir}/{speaker_name}.mp3'
         target_se, audio_name = se_extractor.get_se(reference_speaker, tone_color_converter, target_dir=output_se_dir, vad=True)
 
-        return jsonify({'status': 'success'})
+        return jsonify({'status': 'success', 'message': 'Speaker successfully added'})
     except Exception as e:
         print(e)
         return jsonify({'status': 'failure'})
@@ -109,7 +109,7 @@ def synthesize():
 def get_file():
     try:
         file_name = request.args.get('file_name')
-        return send_file(f'{output_generated_dir}/{file_name}', mimetype='audio/wav', as_attachment=True, attachment_filename=file_name)
+        return send_file(f'{output_generated_dir}/{file_name}', mimetype='audio/wav')
     except Exception as e:
         print(e)
         return jsonify({'status': 'failure'})
