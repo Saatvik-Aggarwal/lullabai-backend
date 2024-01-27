@@ -24,7 +24,7 @@ os.makedirs(output_se_dir, exist_ok=True)
 os.makedirs(output_generated_dir, exist_ok=True)
 
 # Maybe change this in the future
-source_se = torch.load(f'{ckpt_base}/en_default_se.pth').to(device)
+source_se = torch.load(f'{ckpt_base}/en_style_se.pth').to(device)
 
 # create a HTTP endpoint to accept mp3 files to make new speaker
 
@@ -85,7 +85,7 @@ def synthesize():
         if not os.path.exists(save_path):
             # Run the base speaker TTS
             src_path = f'{output_dir}/tmp.wav'
-            base_speaker_tts.tts(text, src_path, speaker='default', language='English', speed=1.0)
+            base_speaker_tts.tts(text, src_path, speaker='friendly', language='English', speed=1.0)
 
             # Convert the tone and color
             tone_color_converter.convert(
