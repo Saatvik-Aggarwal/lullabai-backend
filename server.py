@@ -115,4 +115,4 @@ def get_file():
         return jsonify({'status': 'failure'})
 
 # run on port 80 so that it can be accessed from outside
-app.run(host="0.0.0.0", port=80)
+app.run(host="0.0.0.0", port=80, debug=True)
